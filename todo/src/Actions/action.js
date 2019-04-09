@@ -1,16 +1,16 @@
 export const NEWTODO = 'NEWTODO';
 export const COMPLETED = 'COMPLETED';
 
-export const newTodo = () => {
+export function newTodo(newTodo) {
     return {
         type: 'NEWTODO',
-        payload: 
+        payload: newTodo
     }
 }
 
-export const completed  = () => {
+export function completed(index) {
     return {
         type: 'COMPLETED',
-        payload: 
+        payload: index
     }
 }

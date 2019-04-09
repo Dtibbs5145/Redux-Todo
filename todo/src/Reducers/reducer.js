@@ -1,26 +1,32 @@
-import { NEWTODO, COMPLETED } from '../Actions/action'; 
+import { NEWTODO, COMPLETED } from '../Actions/action';
 
 const initialState = {
     todos: [
         {
             value: 'Walk the dog.',
             completed: false
-          },
-          {
-              value: 'Finish homework',
-              completed: false
-          }
+        },
+        {
+            value: 'Finish homework',
+            completed: false
+        }
     ]
 }
 
+function reducer(state = initialState, action) {
+    switch (action.type) {
+        case NEWTODO:
+            const newTodo = { value: action.payload, completed: false }
+            return { ...state, todos: [...state.todos, newTodo] }
+        case COMPLETED:
+            return {
+                ...state, todos: state.todos.map((todo, index) =>
+                    action.payload === index ? { ...todo, completed: !todo.completed } : todo)
+            }
+        default:
+            return state;
 
-switch (action.type) {
-    case NEWTODO:
-    return { ...state, count: state.count + 1 }
-    case COMPLETED:
-    return { ...state, count: state.count - 1}
-    default:
-        return state;
-
+    }
 }
-};
+
+export default reducer;
